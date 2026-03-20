@@ -1,46 +1,70 @@
-// Initial profile values
-let username = "User";
-let bio = "";
-let glassesMode = "Study Mode";
-let leftBattery = 100;
-let rightBattery = 100;
-let btDevice = "Not connected";
-
-// Update profile function
-function updateProfile() {
-    const nameInput = document.getElementById("username-input").value;
-    const bioInput = document.getElementById("bio-input").value;
-    if(nameInput) username = nameInput;
-    if(bioInput) bio = bioInput;
-    document.getElementById("username-display").textContent = username;
-    alert("Profile updated!");
+// PROFILE SAVE
+function saveProfile() {
+  const name = document.getElementById("nameInput").value;
+  localStorage.setItem("name", name);
+  document.getElementById("nameDisplay").innerText = name;
 }
 
-// Toggle glasses mode
-function toggleMode() {
-    const modes = ["Study Mode", "Learning Mode", "Gaming Mode", "Translation Mode"];
-    let currentIndex = modes.indexOf(glassesMode);
-    glassesMode = modes[(currentIndex + 1) % modes.length];
-    document.getElementById("glasses-mode").textContent = glassesMode;
+// LOAD PROFILE
+window.onload = () => {
+  const saved = localStorage.getItem("name");
+  if(saved){
+    document.getElementById("nameDisplay").innerText = saved;
+  }
 }
 
-// Simulate battery drain (for demo)
-setInterval(() => {
-    leftBattery = Math.max(0, leftBattery - 0.1);
-    rightBattery = Math.max(0, rightBattery - 0.1);
-    document.getElementById("left-batt").textContent = leftBattery.toFixed(0) + "%";
-    document.getElementById("right-batt").textContent = rightBattery.toFixed(0) + "%";
-}, 3000);
+// MODE SYSTEM
+let modes = ["Study","Learning","Gaming","Translation"];
+let current = 0;
 
-// Simulate Bluetooth connection
-function connectBluetooth(deviceName) {
-    btDevice = deviceName;
-    document.getElementById("bt-device").textContent = btDevice;
+function switchMode(){
+  current = (current + 1) % modes.length;
+  document.getElementById("mode").innerText = modes[current];
+  document.getElementById("viewMode").innerText = modes[current];
 }
 
-// App slot click demo
-document.querySelectorAll(".app-slot").forEach(slot => {
-    slot.addEventListener("click", () => {
-        alert(`Opening ${slot.dataset.app} in CRSPY...`);
-    });
+// BATTERY SIM
+let left = 100;
+let right = 100;
+
+setInterval(()=>{
+  left -= 0.2;
+  right -= 0.2;
+
+  document.getElementById("leftBatt").innerText = Math.floor(left)+"%";
+  document.getElementById("rightBatt").innerText = Math.floor(right)+"%";
+},3000);
+
+// APPS
+let activeApps = [];
+
+function openApp(name){
+  activeApps.push(name);
+  document.getElementById("viewApps").innerText = activeApps.join(", ");
+}
+
+// TRANSLATION SIM
+function startTranslation(){
+  const phrases = [
+    "Hello → Cześć",
+    "How are you → Jak się masz",
+    "Good morning → Dzień dobry",
+    "Thank you → Dziękuję"
+  ];
+
+  setInterval(()=>{
+    let rand = phrases[Math.floor(Math.random()*phrases.length)];
+    document.getElementById("translationBox").innerText = rand;
+  },600);
+}
+
+// DRAG APPS (TECH WALL)
+document.querySelectorAll(".app").forEach(app=>{
+  app.addEventListener("dragstart", e=>{
+    e.dataTransfer.setData("text", e.target.innerText);
+  });
+});
+
+document.getElementById("wall").addEventListener("dragover", e=>{
+  e.preventDefault();
 });
