@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRSPY Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>CRSPY Dashboard</h1>
+        <p>Welcome, <span id="username-display">User</span></p>
+    </header>
+
+    <section id="profile">
+        <h2>Profile</h2>
+        <img src="images/default-avatar.png" alt="Avatar" id="user-avatar">
+        <input type="text" id="username-input" placeholder="Enter your name">
+        <textarea id="bio-input" placeholder="Write a bio"></textarea>
+        <button onclick="updateProfile()">Save Profile</button>
+    </section>
+
+    <section id="device-info">
+        <h2>Device Info</h2>
+        <p>Glasses Mode: <span id="glasses-mode">Study Mode</span></p>
+        <p>Left Bracelet Battery: <span id="left-batt">100%</span></p>
+        <p>Right Bracelet Battery: <span id="right-batt">100%</span></p>
+        <p>Bluetooth Device: <span id="bt-device">Not connected</span></p>
+        <button onclick="toggleMode()">Switch Mode</button>
+    </section>
+
+    <section id="apps">
+        <h2>Apps & Websites</h2>
+        <div class="app-slot" data-app="Google Maps">Google Maps</div>
+        <div class="app-slot" data-app="YouTube">YouTube</div>
+        <div class="app-slot" data-app="StableHorse">StableHorse</div>
+        <div class="app-slot" data-app="News">News Feed</div>
+    </section>
+
+    <footer>
+        <p>CRSPY V1 • Meta-themed dashboard • Fully free prototype</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
