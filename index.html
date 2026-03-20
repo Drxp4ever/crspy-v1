@@ -3,31 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CRSPY V1</title>
+<title>CRSPY V2 Dashboard</title>
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header>
-  <h1>CRSPY V1</h1>
-  <p>Future AR Glasses Dashboard</p>
+  <h1>CRSPY V2</h1>
+  <p>Augmented Reality Interface System</p>
 </header>
 
 <!-- PROFILE -->
 <section class="card">
   <h2>Profile</h2>
-  <input id="nameInput" placeholder="Your name">
-  <textarea id="bioInput" placeholder="About you..."></textarea>
-  <button onclick="saveProfile()">Save</button>
+  <input id="nameInput" placeholder="Enter your name">
+  <textarea id="bioInput" placeholder="Bio..."></textarea>
+  <button onclick="saveProfile()">Save Profile</button>
   <p>Welcome, <span id="nameDisplay">User</span></p>
 </section>
 
 <!-- DEVICE -->
 <section class="card">
   <h2>Device Status</h2>
-  <p>Glasses Mode: <span id="mode">Study</span></p>
+  <p>Mode: <span id="mode">Study</span></p>
   <p>Left Bracelet: <span id="leftBatt">100%</span></p>
   <p>Right Bracelet: <span id="rightBatt">100%</span></p>
+  <p>Glasses Battery: <span id="glassBatt">100%</span></p>
   <button onclick="switchMode()">Switch Mode</button>
 </section>
 
@@ -43,44 +45,34 @@
 
 <!-- TECH WALL -->
 <section class="card">
-  <h2>🧠 Tech Wall (AR Simulation)</h2>
-  <div id="wall">
+  <h2>🧠 Tech Wall</h2>
+  <div id="wall"></div>
 
+  <div id="appBar">
     <div class="app" draggable="true">YouTube</div>
     <div class="app" draggable="true">Maps</div>
     <div class="app" draggable="true">Calendar</div>
     <div class="app" draggable="true">Notes</div>
-
+    <div class="app" draggable="true">News</div>
   </div>
 </section>
 
 <!-- TRANSLATION -->
 <section class="card">
   <h2>🌍 Live Translation</h2>
-  <div id="translationBox">
-    Waiting for speech...
-  </div>
-  <button onclick="startTranslation()">Start</button>
+  <div id="translationBox">Waiting...</div>
+  <button onclick="startTranslation()">Start Translation</button>
 </section>
 
-<!-- APPS -->
+<!-- NOTIFICATIONS -->
 <section class="card">
-  <h2>Apps</h2>
-  <button onclick="openApp('YouTube')">YouTube</button>
-  <button onclick="openApp('Maps')">Maps</button>
-  <button onclick="openApp('News')">News</button>
+  <h2>Notifications</h2>
+  <div id="notifications"></div>
 </section>
 
-<!-- V2 -->
-<section class="card">
-  <h2>CRSPY V2 (In Progress)</h2>
-  <ul>
-    <li>Binocular display</li>
-    <li>360° apps</li>
-    <li>AI memory system</li>
-    <li>Full tech walls</li>
-  </ul>
-</section>
+<footer>
+  <p>CRSPY • Future AR Platform</p>
+</footer>
 
 <script src="app.js"></script>
 </body>
