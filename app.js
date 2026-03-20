@@ -1,152 +1,74 @@
-// PROFILE
-function saveProfile(){
-  const name = document.getElementById("nameInput").value;
-  localStorage.setItem("name", name);
-  document.getElementById("nameDisplay").innerText = name;
-}
-
-window.onload = ()=>{
-  const saved = localStorage.getItem("name");
-  if(saved){
-    document.getElementById("nameDisplay").innerText = saved;
+// ===== Translation Setup =====
+const translations = {
+  en: {
+    title: "CRSPY AR Glasses",
+    subtitle: "Experience Augmented Reality",
+    description: "Try out our AR glasses simulation with fully interactive features and multiple languages.",
+    startDemo: "Start Demo",
+    stopDemo: "Stop Demo",
+    toggleMode: "Dark Mode"
+  },
+  pl: {
+    title: "Okulary AR CRSPY",
+    subtitle: "Doświadcz Rzeczywistości Rozszerzonej",
+    description: "Wypróbuj symulację naszych okularów AR z pełną interakcją i wieloma językami.",
+    startDemo: "Rozpocznij Demo",
+    stopDemo: "Zatrzymaj Demo",
+    toggleMode: "Tryb Ciemny"
   }
 };
 
-// MODE SYSTEM
-let modes = ["Study","Learning","Gaming","Translation"];
-let current = 0;
+i18next.init({ lng: 'en', resources: { en: { translation: translations.en }, pl: { translation: translations.pl } } }, updateTexts);
 
-function switchMode(){
-  current = (current + 1) % modes.length;
-  document.getElementById("mode").innerText = modes[current];
-  document.getElementById("viewMode").innerText = modes[current];
-  notify("Mode switched to " + modes[current]);
+function updateTexts() {
+  document.getElementById('title').innerText = i18next.t('title');
+  document.getElementById('subtitle').innerText = i18next.t('subtitle');
+  document.getElementById('description').innerText = i18next.t('description');
+  document.getElementById('startDemo').innerText = i18next.t('startDemo');
+  document.getElementById('stopDemo').innerText = i18next.t('stopDemo');
+  document.getElementById('toggleMode').innerText = i18next.t('toggleMode');
 }
 
-// BATTERY SYSTEM
-let left = 100;
-let right = 100;
-let glass = 100;
+// Language Switcher
+document.getElementById('lang-en').addEventListener('click', () => i18next.changeLanguage('en', updateTexts));
+document.getElementById('lang-pl').addEventListener('click', () => i18next.changeLanguage('pl', updateTexts));
 
-setInterval(()=>{
-  left -= 0.1;
-  right -= 0.1;
-  glass -= 0.05;
-
-  document.getElementById("leftBatt").innerText = Math.floor(left)+"%";
-  document.getElementById("rightBatt").innerText = Math.floor(right)+"%";
-  document.getElementById("glassBatt").innerText = Math.floor(glass)+"%";
-
-  if(left < 20) notify("Left bracelet low battery");
-  if(right < 20) notify("Right bracelet low battery");
-},3000);
-
-// NOTIFICATIONS
-function notify(msg){
-  const div = document.createElement("div");
-  div.className = "notification";
-  div.innerText = msg;
-  document.getElementById("notifications").appendChild(div);
-}
-
-// APPS
-let activeApps = [];
-
-function openApp(name){
-  activeApps.push(name);
-  document.getElementById("viewApps").innerText = activeApps.join(", ");
-}
-
-// TRANSLATION
-function startTranslation(){
-  const phrases = [
-    "Hello → Cześć",
-    "How are you → Jak się masz",
-    "Good morning → Dzień dobry",
-    "Thank you → Dziękuję"
-  ];
-
-  setInterval(()=>{
-    let rand = phrases[Math.floor(Math.random()*phrases.length)];
-    document.getElementById("translationBox").innerText = rand;
-  },600);
-}
-
-// TECH WALL DRAG
-let wall = document.getElementById("wall");
-
-document.querySelectorAll(".app").forEach(app=>{
-  app.addEventListener("dragstart", e=>{
-    e.dataTransfer.setData("text", e.target.innerText);
-  });
+// ===== Dark Mode Toggle =====
+document.getElementById('toggleMode').addEventListener('click', () => {
+  document.body.classList.toggle('dark');
 });
 
-wall.addEventListener("dragover", e=>{
-  e.preventDefault();
-});
+// ===== AR Canvas Simulation =====
+let scene, camera, renderer, cube, animationId;
 
-wall.addEventListener("drop", e=>{
-  e.preventDefault();
-  let name = e.dataTransfer.getData("text");
+function initAR() {
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(75, 800/450, 0.1, 1000);
+  renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('arCanvas'), antialias: true });
+  renderer.setSize(800, 450);
 
-  let div = document.createElement("div");
-  div.className = "wallItem";
-  div.innerText = name;
+  // Cube to simulate AR overlay
+  const geometry = new THREE.BoxGeometry();
+  const material = new THREE.MeshBasicMaterial({ color: 0x0071e3 });
+  cube = new THREE.Mesh(geometry, material);
+  scene.add(cube);
 
-  div.style.left = e.offsetX + "px";
-  div.style.top = e.offsetY + "px";
-
-  makeDraggable(div);
-
-  wall.appendChild(div);
-  saveWall();
-});
-
-// DRAG MOVE
-function makeDraggable(el){
-  let offsetX, offsetY;
-
-  el.onmousedown = (e)=>{
-    offsetX = e.offsetX;
-    offsetY = e.offsetY;
-
-    document.onmousemove = (e)=>{
-      el.style.left = (e.pageX - wall.offsetLeft - offsetX) + "px";
-      el.style.top = (e.pageY - wall.offsetTop - offsetY) + "px";
-    };
-
-    document.onmouseup = ()=>{
-      document.onmousemove = null;
-      saveWall();
-    };
-  };
+  camera.position.z = 5;
 }
 
-// SAVE WALL
-function saveWall(){
-  let items = [];
-  document.querySelectorAll(".wallItem").forEach(el=>{
-    items.push({
-      name: el.innerText,
-      x: el.style.left,
-      y: el.style.top
-    });
-  });
-
-  localStorage.setItem("wall", JSON.stringify(items));
+function animateAR() {
+  animationId = requestAnimationFrame(animateAR);
+  cube.rotation.x += 0.01;
+  cube.rotation.y += 0.01;
+  renderer.render(scene, camera);
 }
 
-// LOAD WALL
-window.onload = ()=>{
-  let data = JSON.parse(localStorage.getItem("wall") || "[]");
+// Button Controls
+document.getElementById('startDemo').addEventListener('click', () => {
+  if (!scene) initAR();
+  animateAR();
+});
 
-  data.forEach(item=>{
-    let div = document.createElement("div");
-    div.className = "wallItem";
-    div.innerText = item.name;
-    div.style.left = item.x;
-    div.style.top = item.y;
-    makeDraggable(div);
-    wall.appendChild(div);
-  });
-};
+document.getElementById('stopDemo').addEventListener('click', () => {
+  cancelAnimationFrame(animationId);
+});
