@@ -1,56 +1,70 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background: #0e0f12;
-    color: #ffffff;
-    margin: 0;
-    padding: 0;
+  font-family: Arial;
+  background: #0a0a0f;
+  color: white;
+  margin: 0;
 }
 
 header {
-    background-color: #1f1f25;
-    padding: 20px;
-    text-align: center;
-    border-bottom: 2px solid #00ffea;
+  text-align: center;
+  padding: 20px;
+  border-bottom: 1px solid #00f7ff;
 }
 
-h1, h2 {
-    margin: 0.3em 0;
+.card {
+  background: #111;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #00f7ff33;
+  box-shadow: 0 0 15px #00f7ff22;
+  transition: 0.3s;
 }
 
-section {
-    margin: 20px;
-    padding: 20px;
-    background-color: #1a1a1f;
-    border-radius: 10px;
-    border: 1px solid #00ffea;
-}
-
-input, textarea, button {
-    display: block;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
+.card:hover {
+  box-shadow: 0 0 25px #00f7ff66;
 }
 
 button {
-    background-color: #00ffea;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
+  background: #00f7ff;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 6px;
 }
 
-.app-slot {
-    display: inline-block;
-    margin: 5px;
-    padding: 15px;
-    border: 2px solid #00ffea;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s;
+button:hover {
+  background: #00cfd6;
 }
 
-.app-slot:hover {
-    background-color: #00ffea;
-    color: #000;
+/* TECH WALL */
+#wall {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.app {
+  padding: 15px;
+  background: #222;
+  border-radius: 8px;
+  cursor: grab;
+  border: 1px solid #00f7ff;
+  transition: 0.3s;
+}
+
+.app:hover {
+  transform: scale(1.1);
+  background: #00f7ff;
+  color: black;
+}
+
+/* TRANSLATION */
+#translationBox {
+  background: black;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #00f7ff;
+  min-height: 60px;
 }
