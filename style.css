@@ -1,92 +1,23 @@
-body {
-  background: #05060a;
-  color: white;
-  font-family: Arial;
-  margin: 0;
-}
+/* Reset & Base */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
+body { background: #f5f5f7; color: #111; transition: background 0.3s, color 0.3s; }
+header, footer { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+h1, h2 { font-weight: 400; }
+.language-switch button { margin-left: 0.5rem; padding: 0.3rem 0.6rem; border: none; border-radius: 5px; cursor: pointer; transition: background 0.2s; }
+.language-switch button:hover { background: #ddd; }
 
-header {
-  text-align: center;
-  padding: 20px;
-  border-bottom: 1px solid #00eaff;
-}
+main { display: flex; flex-direction: column; align-items: center; padding: 2rem; gap: 2rem; }
+.ar-demo { position: relative; width: 90%; max-width: 800px; height: 450px; background: #000; border-radius: 15px; overflow: hidden; }
+canvas#arCanvas { width: 100%; height: 100%; display: block; }
 
-.card {
-  background: #111;
-  margin: 20px;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 0 20px #00eaff22;
-  transition: 0.3s;
-}
+.controls { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 1rem; }
+.btn { padding: 0.6rem 1.2rem; border: none; border-radius: 10px; background: #0071e3; color: #fff; cursor: pointer; transition: all 0.3s; }
+.btn:hover { background: #005bb5; transform: scale(1.05); }
 
-.card:hover {
-  box-shadow: 0 0 30px #00eaff88;
-}
+.info { max-width: 700px; text-align: center; }
+footer p { font-size: 0.9rem; color: #555; }
 
-button {
-  background: #00eaff;
-  border: none;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #00c0d0;
-}
-
-/* TECH WALL */
-#wall {
-  position: relative;
-  height: 300px;
-  border: 2px dashed #00eaff;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-/* APP BAR */
-#appBar {
-  margin-top: 10px;
-}
-
-.app {
-  display: inline-block;
-  padding: 10px;
-  margin: 5px;
-  background: #222;
-  border-radius: 8px;
-  cursor: grab;
-  border: 1px solid #00eaff;
-}
-
-/* WALL ITEMS */
-.wallItem {
-  position: absolute;
-  padding: 15px;
-  background: #00eaff;
-  color: black;
-  border-radius: 10px;
-  cursor: move;
-}
-
-/* TRANSLATION */
-#translationBox {
-  background: black;
-  padding: 15px;
-  border-radius: 8px;
-  border: 1px solid #00eaff;
-}
-
-/* NOTIFICATIONS */
-#notifications {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.notification {
-  background: #222;
-  padding: 10px;
-  border-radius: 5px;
-}
+/* Dark Mode */
+body.dark { background: #111; color: #f5f5f7; }
+body.dark header, body.dark footer { background: #1c1c1e; }
+body.dark .btn { background: #0a84ff; }
