@@ -1,63 +1,73 @@
 body {
-  font-family: Arial;
-  background: #0a0a0f;
+  background: #05060a;
   color: white;
+  font-family: Arial;
   margin: 0;
 }
 
 header {
   text-align: center;
   padding: 20px;
-  border-bottom: 1px solid #00f7ff;
+  border-bottom: 1px solid #00eaff;
 }
 
 .card {
   background: #111;
   margin: 20px;
   padding: 20px;
-  border-radius: 12px;
-  border: 1px solid #00f7ff33;
-  box-shadow: 0 0 15px #00f7ff22;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #00eaff22;
   transition: 0.3s;
 }
 
 .card:hover {
-  box-shadow: 0 0 25px #00f7ff66;
+  box-shadow: 0 0 30px #00eaff88;
 }
 
 button {
-  background: #00f7ff;
+  background: #00eaff;
   border: none;
   padding: 10px;
-  margin-top: 10px;
+  border-radius: 8px;
   cursor: pointer;
-  border-radius: 6px;
 }
 
 button:hover {
-  background: #00cfd6;
+  background: #00c0d0;
 }
 
 /* TECH WALL */
 #wall {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  position: relative;
+  height: 300px;
+  border: 2px dashed #00eaff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* APP BAR */
+#appBar {
+  margin-top: 10px;
 }
 
 .app {
-  padding: 15px;
+  display: inline-block;
+  padding: 10px;
+  margin: 5px;
   background: #222;
   border-radius: 8px;
   cursor: grab;
-  border: 1px solid #00f7ff;
-  transition: 0.3s;
+  border: 1px solid #00eaff;
 }
 
-.app:hover {
-  transform: scale(1.1);
-  background: #00f7ff;
+/* WALL ITEMS */
+.wallItem {
+  position: absolute;
+  padding: 15px;
+  background: #00eaff;
   color: black;
+  border-radius: 10px;
+  cursor: move;
 }
 
 /* TRANSLATION */
@@ -65,6 +75,18 @@ button:hover {
   background: black;
   padding: 15px;
   border-radius: 8px;
-  border: 1px solid #00f7ff;
-  min-height: 60px;
+  border: 1px solid #00eaff;
+}
+
+/* NOTIFICATIONS */
+#notifications {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.notification {
+  background: #222;
+  padding: 10px;
+  border-radius: 5px;
 }
