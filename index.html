@@ -1,79 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CRSPY V2 Dashboard</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRSPY AR Glasses</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/i18next@21.6.16/i18next.min.js"></script>
+  <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
 </head>
-
 <body>
+  <header>
+    <h1 id="title">CRSPY AR Glasses</h1>
+    <div class="language-switch">
+      <button id="lang-en">EN</button>
+      <button id="lang-pl">PL</button>
+    </div>
+  </header>
 
-<header>
-  <h1>CRSPY V2</h1>
-  <p>Augmented Reality Interface System</p>
-</header>
+  <main>
+    <section class="ar-demo">
+      <canvas id="arCanvas"></canvas>
+      <div class="controls">
+        <button id="startDemo" class="btn">Start Demo</button>
+        <button id="stopDemo" class="btn">Stop Demo</button>
+        <button id="toggleMode" class="btn">Dark Mode</button>
+      </div>
+    </section>
+    
+    <section class="info">
+      <h2 id="subtitle">Experience Augmented Reality</h2>
+      <p id="description">Try out our AR glasses simulation with fully interactive features and multiple languages.</p>
+    </section>
+  </main>
 
-<!-- PROFILE -->
-<section class="card">
-  <h2>Profile</h2>
-  <input id="nameInput" placeholder="Enter your name">
-  <textarea id="bioInput" placeholder="Bio..."></textarea>
-  <button onclick="saveProfile()">Save Profile</button>
-  <p>Welcome, <span id="nameDisplay">User</span></p>
-</section>
+  <footer>
+    <p>© 2026 CRSPY AR Glasses</p>
+  </footer>
 
-<!-- DEVICE -->
-<section class="card">
-  <h2>Device Status</h2>
-  <p>Mode: <span id="mode">Study</span></p>
-  <p>Left Bracelet: <span id="leftBatt">100%</span></p>
-  <p>Right Bracelet: <span id="rightBatt">100%</span></p>
-  <p>Glasses Battery: <span id="glassBatt">100%</span></p>
-  <button onclick="switchMode()">Switch Mode</button>
-</section>
-
-<!-- GLASSES VIEW -->
-<section class="card">
-  <h2>👓 Glasses View</h2>
-  <div id="glassesView">
-    <p>Mode: <span id="viewMode">Study</span></p>
-    <p>Apps: <span id="viewApps">None</span></p>
-    <p>Notifications: <span id="notif">0</span></p>
-  </div>
-</section>
-
-<!-- TECH WALL -->
-<section class="card">
-  <h2>🧠 Tech Wall</h2>
-  <div id="wall"></div>
-
-  <div id="appBar">
-    <div class="app" draggable="true">YouTube</div>
-    <div class="app" draggable="true">Maps</div>
-    <div class="app" draggable="true">Calendar</div>
-    <div class="app" draggable="true">Notes</div>
-    <div class="app" draggable="true">News</div>
-  </div>
-</section>
-
-<!-- TRANSLATION -->
-<section class="card">
-  <h2>🌍 Live Translation</h2>
-  <div id="translationBox">Waiting...</div>
-  <button onclick="startTranslation()">Start Translation</button>
-</section>
-
-<!-- NOTIFICATIONS -->
-<section class="card">
-  <h2>Notifications</h2>
-  <div id="notifications"></div>
-</section>
-
-<footer>
-  <p>CRSPY • Future AR Platform</p>
-</footer>
-
-<script src="app.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
